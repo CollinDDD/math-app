@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios"
 import "./Login.css"
 import { Link, useNavigate } from "react-router-dom";
 import Validation from "./LoginValidation";
@@ -6,19 +7,7 @@ import Validation from "./LoginValidation";
 
 function Login() {
     const navigate = useNavigate();
-    const [users, setUsers] = useState([{}]);
-
-    useEffect(() => {
-        fetch("http://localhost:5001/users")
-          .then(res => res.json())
-          .then(data => {
-            setUsers([data.data]);
-          })
-          .catch( error => {
-            console.error("Fetch error:", error);
-          })
-      }, [])
-
+    
     const [values, setValues] = useState({
        username: '',
         password: '' 
@@ -36,24 +25,33 @@ function Login() {
         e.preventDefault();
         setErrors(Validation(values))
         if (!errors) {
-            const foundUser = users.find(user => user.user_name === values.username && user.user_password === values.password);
-            if (foundUser) {
-                alert('Login successful')
-                .then(res => {
+            axios.post("http://localhost:5001/login", {
+                username: values.username,
+                password: values.password
+            })
+            .then(res => {
+                console.log(res.data, res.data.data)
+                if (res.data.data) {
+                    localStorage.setItem("user", JSON.stringify(res.data.data));
                     navigate("/home");
-                });
-            } else {
-                alert('Invalid username or password');
-            }
+                } else {
+                    alert('Invalid username or password');
+                }
+            })
+            .catch(err => console.log(err));
+        } else {
+            console.log("something's not right")
         }
     }
+
 
     return (
         <>
         
         <div className="login-container">
-            <h2>Log In</h2>
+            
             <form action="" onSubmit={handleSubmit}>
+                <h2 className="login-header">Log In</h2>
                 <label htmlFor="username">Username:</label>
                 <input 
                     type="text"

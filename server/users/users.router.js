@@ -7,6 +7,10 @@ router.route("/")
     .post(controller.create)
     .all(methodNotAllowed);
 
+router.route("/login")
+    .post(controller.checkLogin)
+    .all(methodNotAllowed);
+
 router.route("/users")
     .get(controller.list);
 

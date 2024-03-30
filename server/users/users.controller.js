@@ -14,6 +14,16 @@ async function readUserData(req, res) {
     res.json({ data: await usersService.readUserData(userId) });
 }
 
+async function checkLogin(req, res) {
+    const { username, password } = req.body;
+    const user = await usersService.checkLogin(username, password);
+    if (user) {
+        res.status(200).json({ data: user });
+    } else {
+        res.status(404).json({ message: "User not found" });
+    }
+}
+
 async function updateHighScore(req, res, next) {
     const userId = req.params.userId;
     const { user_highscore } = req.body;
@@ -40,5 +50,6 @@ module.exports = {
     read: asyncErrorBoundary(readUserData),
     create: asyncErrorBoundary(create),
     update: asyncErrorBoundary(updateHighScore),
-    list: asyncErrorBoundary(list)
+    list: asyncErrorBoundary(list),
+    checkLogin: asyncErrorBoundary(checkLogin)
 };

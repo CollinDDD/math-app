@@ -5,20 +5,27 @@ function create(newUser) {
         .insert(newUser);
 }
 
-function readUserData(userId) {
+async function readUserData(userId) {
     return knex("users")
         .select("*")
         .where({user_id: userId})
         .first();
 }
 
-function updateHighScore(userId, newHighScore) {
+async function checkLogin(username, password) {
+    return knex("users")
+        .select("*")
+        .where({ user_name: username, user_password: password })
+        .first();
+}
+
+async function updateHighScore(userId, newHighScore) {
     return knex("users")
         .where({ user_id: userId})
         .update({user_highscore: newHighScore});
 }
 
-function list() {
+async function list() {
     return knex("users")
         .select("*")
 }
@@ -27,5 +34,6 @@ module.exports = {
     readUserData,
     create,
     updateHighScore,
-    list
+    list,
+    checkLogin
 };
