@@ -32,8 +32,13 @@ async function updateHighScore(req, res, next) {
     res.status(200).json({ data: { user_highscore }, message });
 }
 
+async function list(req, res) {
+    res.json({data: await usersService.list()});
+}
+
 module.exports = {
     read: asyncErrorBoundary(readUserData),
     create: asyncErrorBoundary(create),
     update: asyncErrorBoundary(updateHighScore),
+    list: asyncErrorBoundary(list)
 };

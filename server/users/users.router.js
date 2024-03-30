@@ -7,6 +7,9 @@ router.route("/")
     .post(controller.create)
     .all(methodNotAllowed);
 
+router.route("/users")
+    .get(controller.list);
+
 router.route("/:userId")
     .get(controller.read)
     .all(methodNotAllowed);

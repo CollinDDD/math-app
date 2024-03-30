@@ -18,8 +18,14 @@ function updateHighScore(userId, newHighScore) {
         .update({user_highscore: newHighScore});
 }
 
+function list() {
+    return knex("users")
+        .select("*")
+}
+
 module.exports = {
     readUserData,
     create,
     updateHighScore,
+    list
 };
