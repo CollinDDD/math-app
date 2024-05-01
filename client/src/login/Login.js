@@ -74,6 +74,7 @@ function Login() {
                 {errors.password && <span>{errors.password}</span>}
                 <button type="submit">Log in</button>
                 <Link className="create-account" to="/register">Create Account</Link>
+                <Link className="dashboard" to="/dashboard">dashboard</Link>
             </form>
         </div>
         </>

@@ -67,7 +67,7 @@
     margin-top: 20px;
 }
 
-.math-container button :hover {
+.math-container button:hover {
     cursor: pointer;
 }
 

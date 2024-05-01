@@ -29,42 +29,43 @@ function Addition() {
     }
 
 
-    // Timer component
-    function Timer({ startTimer }) {
-        const timerId = useRef();
+// Timer component
+function Timer({ startTimer }) {
+    const timerId = useRef();
 
-        const stopTimer = () => {
-            setIsRunning(false);
-            setTimer(60); // Reset timer to 60 seconds
-        };
+    const stopTimer = () => {
+        setIsRunning(false);
+        setTimer(60); // Reset timer to 60 seconds
+    };
 
-        useEffect(() => {
-            if (isRunning) {
-                timerId.current = setInterval(() => {
-                    setTimer((prevTimer) => {
-                        if (prevTimer === 0) {
-                            clearInterval(timerId.current);
-                            stopTimer(); // Move stopTimer here
-                            return prevTimer;
-                        }
-                        return prevTimer - 1;
-                    });
-                }, 1000);
-                return () => clearInterval(timerId.current);
-            }
-        }, [isRunning]);
+    useEffect(() => {
+        if (isRunning) {
+            timerId.current = setInterval(() => {
+                setTimer((prevTimer) => {
+                    if (prevTimer === 0) {
+                        clearInterval(timerId.current);
+                        stopTimer(); // Move stopTimer here
+                        return prevTimer;
+                    }
+                    return prevTimer - 1;
+                });
+            }, 1000);
+            return () => clearInterval(timerId.current);
+        }
+    }, []); 
 
-        return (
-            <div className="timer">
-                <h2 className="time-header">Time: {timer}</h2>
-                {!isRunning ? (
-                    <button onClick={startTimer}>Start</button>
-                ) : (
-                    <button onClick={stopTimer}>Reset</button>
-                )}
-            </div>
-        );
-    }
+    return (
+        <div className="timer">
+            <h2 className="time-header">Time: {timer}</h2>
+            {!isRunning ? (
+                <button onClick={startTimer}>Start</button>
+            ) : (
+                <button onClick={stopTimer}>Reset</button>
+            )}
+        </div>
+    );
+}
+
 
     // Start the game when the component mounts
     useEffect(() => {
