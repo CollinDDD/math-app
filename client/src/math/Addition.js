@@ -1,0 +1,116 @@
+import React, { useEffect, useRef, useState } from 'react';
+import "./Math.css";
+
+function Addition() {
+    const [currentProblem, setCurrentProblem] = useState(null);
+    const [score, setScore] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const [timer, setTimer] = useState(60); // Timer set to 60 seconds
+    const operator = '+';
+    const answerInputRef = useRef(null); // Ref for the answer input element
+
+    // Generator function to create a random addition problem
+    function generateProblem() {
+        let num1 = Math.floor(Math.random() * 10) + 1;
+        let num2 = Math.floor(Math.random() * 10) + 1;
+        let problem = `${num1} ${operator} ${num2}`;
+        let answer = num1 + num2;
+        setCurrentProblem({ problem, answer });
+    }
+
+    // Check the answer and update the score
+    function checkAnswer(userAnswer) {
+        if (parseInt(userAnswer) === currentProblem.answer) {
+            setScore(score + 1);
+        }
+        generateProblem();
+        // Reset the input field to blank
+        answerInputRef.current.value = "";
+    }
+
+
+    // Timer component
+    function Timer({ startTimer }) {
+        const timerId = useRef();
+
+        const stopTimer = () => {
+            setIsRunning(false);
+            setTimer(60); // Reset timer to 60 seconds
+        };
+
+        useEffect(() => {
+            if (isRunning) {
+                timerId.current = setInterval(() => {
+                    setTimer((prevTimer) => {
+                        if (prevTimer === 0) {
+                            clearInterval(timerId.current);
+                            stopTimer(); // Move stopTimer here
+                            return prevTimer;
+                        }
+                        return prevTimer - 1;
+                    });
+                }, 1000);
+                return () => clearInterval(timerId.current);
+            }
+        }, [isRunning]);
+
+        return (
+            <div className="timer">
+                <h2 className="time-header">Time: {timer}</h2>
+                {!isRunning ? (
+                    <button onClick={startTimer}>Start</button>
+                ) : (
+                    <button onClick={stopTimer}>Reset</button>
+                )}
+            </div>
+        );
+    }
+
+    // Start the game when the component mounts
+    useEffect(() => {
+        generateProblem();
+    }, []);
+
+    // Handle key press event on the answer input
+    // Handle key press event on the answer input
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent the default behavior of the Enter key
+            const nextButton = e.target.closest('.math-container').querySelector('button');
+            if (nextButton) {
+                nextButton.click(); // Click the next button
+            }
+        }
+    };
+    
+    
+
+
+    return (
+        <>
+        <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
+        <div className="math-container">
+            <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
+            
+            <div className="score-input">
+                {currentProblem && (
+                    <p className='problem'>
+                        {currentProblem.problem} = <input
+                            className='answer'
+                            type="text"
+                            ref={answerInputRef}
+                            onKeyDown={handleKeyPress}
+                        />
+                    </p>
+                )}
+            </div>
+            <button onClick={() => checkAnswer(answerInputRef.current.value)}>Next<i className="fas fa-arrow-right"></i></button>
+            <div className='score'>
+                <p >Score: {score}</p>
+            </div>
+        </div>
+        </>
+    );
+}
+
+export default Addition;

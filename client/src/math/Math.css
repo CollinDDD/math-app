@@ -1,0 +1,136 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: digital;
+    src: url(../assets/E1234.ttf);
+}
+
+.math-container {
+    background-image: url("../assets/Blackboard.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 600px;
+    text-align: center;
+    display: flex;
+    border: 25px groove rgb(146, 79, 16);
+    padding: 0px;
+    flex-direction: column;
+    color: white;
+    width: 50%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.math-header {
+    font-family: chalkboy;
+    color: white;
+    font-size: 48px;
+    padding: 0 16px;
+}
+
+.problem {
+    font-size: 72px;
+}
+
+.answer {
+    font-size: 72px;
+    width: 25%;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(240, 248, 255, 0);
+    border: 2px white;
+    border-style:dashed;
+}
+
+.score-input {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+}
+
+.math-container button {
+    font-family: chalkboy;
+    font-size: 48px;
+    width: 100px;
+    color: white;
+    background-color: rgba(240, 248, 255, 0);
+    border: 2px white;
+    border-style: solid;
+    border-radius: 0px;
+    margin-top: 20px;
+}
+
+.math-container button :hover {
+    cursor: pointer;
+}
+
+.math-container i {
+    font-size: 20px;
+    padding-left: 8px;
+}
+
+.score {
+    position: absolute;
+    bottom: 5%;
+    right: 27%;
+    padding: 10px;
+    width: 50%;
+    width: 15%;
+    font-size: 32px;
+}
+
+
+/* timer */
+
+
+
+
+
+.time {
+    align-items: center;
+    
+    font-family: digital;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+    border-radius: 50px;
+    border: 3px solid white;
+}
+
+.time-header {
+    text-align: right;
+    background-color: black;
+    color: green;
+}
+
+.timer {
+   text-align: right;
+   padding-right: 5%;
+}
+
+.timer button {
+    font-family: chalkboy;
+    font-size: 40px;
+    color: rgb(255, 124, 1);
+    background-color: rgba(251, 255, 0, 1);
+    width: 135px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    border: 3px solid rgb(255, 124, 1); /* Add a border with a slight transparency */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.timer button:hover {
+    border: 3px solid rgb(165, 80, 0); /* Darken the border on hover */
+    box-shadow: none; /* Remove the shadow on hover */
+    cursor: pointer;
+}

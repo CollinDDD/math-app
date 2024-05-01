@@ -1,3 +1,13 @@
+@font-face {
+    font-family: crossed-out;
+    src: url(../assets/CrossedOut-nR7A1.otf);
+}
+
+@font-face {
+    font-family: chalkboy;
+    src: url(../assets/ChalkboyRegular-vmXe7.otf);
+}
+
 * {
     padding: 0px;
     margin: 0px;
@@ -14,7 +24,6 @@ body  {
     justify-content: center;
     align-items: center;
     display: flex;
-
 }
 
 .home-container {
@@ -22,11 +31,12 @@ body  {
     text-align: center;
     display: flex;
     flex-direction: column;
-    font-size:xx-large;
+    font-size:50px;
     backdrop-filter: blur(3px);
     padding: 25px;
-    border-radius: 10%;
-    box-shadow: 0 8px 12px  black ;
+    border-radius: 75px;
+    box-shadow: 0 8px 12px  black;
+    font-family: chalkboy;
 }
 
 .icons {
@@ -46,21 +56,43 @@ body  {
 
 .symbols {
     padding:20px;
+    margin: 10px;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
     flex: 1;
+    border: 5px solid black;
+    border-radius: 75px;
+    background-color: rgba(0, 0, 0, 0.354);
+    color: rgb(255, 124, 1);
+    text-shadow: -3px 3px 2px  rgba(251, 255, 0, 0.671);
 }
-.symbols button {
+
+.header {
+    font-size: 70px;
+    text-decoration: underline;
+}
+
+.symbols h3 {
+    padding-bottom: 15px;
+
+}
+
+.symbols .link {
     font-size: 130px;
     justify-content: center;
     align-items: center;
     display: flex;
     background-color: rgba(251, 255, 0, 0.671);
+    color: rgb(255, 124, 1);
     border-radius: 10px;
+    box-shadow: -3px 3px 2px  black;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.symbols button:hover {
-
+.symbols .link:hover {
+    cursor: pointer;
+    transform: scale(1.1); /* Scale the button to 1.1 times its size */
+    box-shadow: -5px 4px 15px black; /* Increase the shadow to create a pop-out effect */
 }
