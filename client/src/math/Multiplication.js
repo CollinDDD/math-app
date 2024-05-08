@@ -56,7 +56,7 @@ function Multiplication() {
                 }, 1000);
                 return () => clearInterval(timerId.current);
             }
-        }, [isRunning]);
+        }, []);
 
         return (
             <div className="timer">
