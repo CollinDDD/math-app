@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosUndo } from "react-icons/io";
-
 import "./Math.css";
 
 function Multiplication() {
@@ -9,10 +8,11 @@ function Multiplication() {
     const [score, setScore] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [timer, setTimer] = useState(60); // Timer set to 60 seconds
+    const [showModal, setShowModal] = useState(false); // State for showing modal
     const operator = 'x';
     const answerInputRef = useRef(null); // Ref for the answer input element
 
-    // Generator function to create a random addition problem
+    // Generator function to create a random multiplication problem
     function generateProblem() {
         let num1 = Math.floor(Math.random() * 10) + 1;
         let num2 = Math.floor(Math.random() * 10) + 1; 
@@ -32,51 +32,49 @@ function Multiplication() {
         answerInputRef.current.value = "";
     }
 
+    // Timer component
+    function Timer({ startTimer }) {
+        const timerId = useRef();
 
-// Timer component
-function Timer({ startTimer }) {
-    const timerId = useRef();
+        const stopTimer = () => {
+            setIsRunning(false);
+            setTimer(60); // Reset timer to 60 seconds
+            setShowModal(true); // Show the modal with the score
+        };
 
-    const stopTimer = () => {
-        setIsRunning(false);
-        setTimer(60); // Reset timer to 60 seconds
-    };
+        useEffect(() => {
+            if (isRunning) {
+                timerId.current = setInterval(() => {
+                    setTimer((prevTimer) => {
+                        if (prevTimer === 0) {
+                            clearInterval(timerId.current);
+                            stopTimer(); // Move stopTimer here
+                            return prevTimer;
+                        }
+                        return prevTimer - 1;
+                    });
+                }, 1000);
+                return () => clearInterval(timerId.current);
+            }
+        }, [isRunning]);
 
-    useEffect(() => {
-        if (isRunning) {
-            timerId.current = setInterval(() => {
-                setTimer((prevTimer) => {
-                    if (prevTimer === 0) {
-                        clearInterval(timerId.current);
-                        stopTimer(); // Move stopTimer here
-                        return prevTimer;
-                    }
-                    return prevTimer - 1;
-                });
-            }, 1000);
-            return () => clearInterval(timerId.current);
-        }
-    }, []); 
-
-    return (
-        <div className="timer">
-            <h2 className="time-header">seconds: {timer}</h2>
-            {!isRunning ? (
-                <button onClick={startTimer}>Start</button>
-            ) : (
-                <button onClick={stopTimer}>Reset</button>
-            )}
-        </div>
-    );
-}
-
+        return (
+            <div className="timer">
+                <h2 className="time-header">seconds: {timer}</h2>
+                {!isRunning ? (
+                    <button onClick={startTimer}>Start</button>
+                ) : (
+                    <button onClick={stopTimer}>Reset</button>
+                )}
+            </div>
+        );
+    }
 
     // Start the game when the component mounts
     useEffect(() => {
         generateProblem();
     }, []);
 
-    // Handle key press event on the answer input
     // Handle key press event on the answer input
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
@@ -87,37 +85,43 @@ function Timer({ startTimer }) {
             }
         }
     };
-    
-    
-
 
     return (
         <>
-        <div className='back-to-dash'>
-            <Link className='link' to="/dashboard">BACK TO DASHBOARD <IoIosUndo className='arrow' /></Link>
-        </div>
-        <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
-        <div className="math-container">
-            <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
-            
-            <div className="score-input">
-                {currentProblem && (
-                    <p className='problem'>
-                        {currentProblem.problem} = <input
-                            className='answer'
-                            type="text"
-                            ref={answerInputRef}
-                            maxLength="3"
-                            onKeyDown={handleKeyPress}
-                        />
-                    </p>
-                )}
+            <div className='back-to-dash'>
+                <Link className='link' to="/dashboard">BACK TO DASHBOARD <IoIosUndo className='arrow' /></Link>
             </div>
-            <button onClick={() => checkAnswer(answerInputRef.current.value)}>Next<i className="fas fa-arrow-right"></i></button>
-            <div className='score'>
-                <p >Score: {score}</p>
+            <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
+            <div className="math-container">
+                <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
+                
+                <div className="score-input">
+                    {currentProblem && (
+                        <p className='problem'>
+                            {currentProblem.problem} = <input
+                                className='answer'
+                                type="text"
+                                ref={answerInputRef}
+                                maxLength="3"
+                                onKeyDown={handleKeyPress}
+                            />
+                        </p>
+                    )}
+                </div>
+                <button onClick={() => checkAnswer(answerInputRef.current.value)}>Next<i className="fas fa-arrow-right"></i></button>
+                <div className='score'>
+                    <p>Score: {score}</p>
+                </div>
             </div>
-        </div>
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Time's Up!</h2>
+                        <p>Your score is: {score}</p>
+                        <button onClick={() => setShowModal(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
