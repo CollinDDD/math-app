@@ -4,20 +4,28 @@ import { IoIosUndo } from "react-icons/io";
 
 import "./Math.css";
 
-function Addition() {
+
+function Division() {
     const [currentProblem, setCurrentProblem] = useState(null);
     const [score, setScore] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [timer, setTimer] = useState(60); // Timer set to 60 seconds
-    const operator = '+';
+    const operator = '÷';
     const answerInputRef = useRef(null); // Ref for the answer input element
 
     // Generator function to create a random addition problem
     function generateProblem() {
-        let num1 = Math.floor(Math.random() * 10) + 1;
-        let num2 = Math.floor(Math.random() * 10) + 1;
+       let num1 = Math.floor(Math.random() * 100) + 1; // Generate a random number between 1 and 100
+       let num2 = Math.floor(Math.random() * 10) + 1; // Generate a random number between 1 and 10
+  
+        // Ensure that the division result is an integer and not higher than 10
+        while (num1 % num2 !== 0 || num1 / num2 > 10) {
+            num1 = Math.floor(Math.random() * 100) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+        }
+        
         let problem = `${num1} ${operator} ${num2}`;
-        let answer = num1 + num2;
+        let answer = num1 / num2;
         setCurrentProblem({ problem, answer });
     }
 
@@ -106,7 +114,7 @@ function Timer({ startTimer }) {
                             className='answer'
                             type="text"
                             ref={answerInputRef}
-                            maxLength="2"
+                            maxLength="3"
                             onKeyDown={handleKeyPress}
                         />
                     </p>
@@ -121,4 +129,4 @@ function Timer({ startTimer }) {
     );
 }
 
-export default Addition;
+export default Division;

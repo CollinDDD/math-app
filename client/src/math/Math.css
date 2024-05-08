@@ -9,20 +9,36 @@
     src: url(../assets/E1234.ttf);
 }
 
+.back-to-dash {
+    margin-top: 20px;
+}
+
+.back-to-dash .link {
+    text-decoration: none;
+    font-family: chalkboy;
+    color: white;
+    font-size: 40px;
+    background-image: url("../assets/Blackboard.png");
+    padding: 10px;
+    border: 15px groove rgb(146, 79, 16);
+}
+
+
+
 .math-container {
     background-image: url("../assets/Blackboard.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    min-height: 600px;
+    min-height: 500px;
     text-align: center;
     display: flex;
     border: 25px groove rgb(146, 79, 16);
     padding: 0px;
     flex-direction: column;
     color: white;
-    width: 50%;
+    width: 65%;
     margin: 0 auto;
     align-items: center;
 }
@@ -40,10 +56,11 @@
 
 .answer {
     font-size: 72px;
-    width: 25%;
+    width: 130px;
     color: white;
     align-items: center;
     justify-content: center;
+    text-align: center;
     background-color: rgba(240, 248, 255, 0);
     border: 2px white;
     border-style:dashed;
@@ -72,19 +89,16 @@
 }
 
 .math-container i {
-    font-size: 20px;
+    font-size: 42px;
     padding-left: 8px;
 }
 
 .score {
-    position: absolute;
-    bottom: 5%;
-    right: 27%;
-    padding: 10px;
-    width: 50%;
-    width: 15%;
+    align-self: flex-end;
+    padding-right: 16px;
     font-size: 32px;
 }
+
 
 
 /* timer */
@@ -94,26 +108,34 @@
 
 
 .time {
-    align-items: center;
-    
-    font-family: digital;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 8px;
-    padding-bottom: 4px;
-    border-radius: 50px;
-    border: 3px solid white;
+    display: flex;
+    justify-content: space-between; /* Ensure even spacing between children */
+    align-items: center; /* Align items vertically */
+    padding-right: 5%; /* Adjust padding to control the right edge space */
 }
 
 .time-header {
-    text-align: right;
+    text-align: center;
     background-color: black;
     color: green;
+    border: 3px solid white;
+    padding: 10px; /* Add padding for extra space around the text */
+ /* Ensure the width is at least enough to fit the content */
 }
 
 .timer {
-   text-align: right;
-   padding-right: 5%;
+    padding-top: 10px;
+    text-align: right;
+    padding-right: 5%;
+    font-family: digital;
+    justify-content: center;
+}
+
+.timer h2 {
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+    margin-left: 70%;
 }
 
 .timer button {
