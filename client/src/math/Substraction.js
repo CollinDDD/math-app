@@ -7,7 +7,7 @@ function Subtraction() {
     const [currentProblem, setCurrentProblem] = useState(null);
     const [score, setScore] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
-    const [timer, setTimer] = useState(6000); // Timer set to 60 seconds
+    const [timer, setTimer] = useState(60); // Timer set to 60 seconds
     const [showModal, setShowModal] = useState(false); // State for showing modal
     const operator = '-';
     const answerInputRef = useRef(null); // Ref for the answer input element
