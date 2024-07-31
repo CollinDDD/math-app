@@ -103,7 +103,7 @@ function Addition() {
                                 <p className='problem'>
                                     {currentProblem.problem} = <input
                                         className='answer'
-                                        type="text"
+                                        type="tel"
                                         ref={answerInputRef}
                                         maxLength="2"
                                         onKeyDown={handleKeyPress}
