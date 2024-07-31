@@ -78,26 +78,25 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    min-height: 400px;
+    min-height: 550px;
     text-align: center;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     border: 25px groove rgb(146, 79, 16);
     padding: 0px;
-    flex-direction: column;
     color: white;
-    min-width: 500px;
+    min-width: 550px;
     width: 65%;
-    height: 400px; /* Set a fixed height */
-    margin: 0 auto; /* Adjusted to prevent overlapping with the timer */
-    align-items: center;
-    justify-content: center;
+    height: 400px; 
+    margin: 0 auto; 
 }
 
 .math-header {
     font-family: chalkboy;
     color: white;
     font-size: 48px;
-    padding: 0 16px;
 }
 
 .problem {
@@ -122,7 +121,39 @@
     padding-top: 24px;
 }
 
-.math-container button {
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.number-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Add space between buttons */
+}
+
+.number-buttons button {
+    font-family: chalkboy;
+    font-size: 72px; 
+    width: 70px; 
+    height: 70px; 
+    color: white;
+    background-color: rgba(240, 248, 255, 0);
+    border: 2px white;
+    border-style: solid;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.number-buttons button:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2); /* Add a hover effect for better visibility */
+}
+
+.enter-button, .delete-button {
     font-family: chalkboy;
     font-size: 48px;
     width: 125px;
@@ -131,7 +162,18 @@
     border: 2px white;
     border-style: solid;
     border-radius: 0px;
-    margin-top: 20px;
+    margin: 5px 20px;
+}
+
+.delete-button {
+    display: flex;
+    font-size: 41px;
+    justify-content: center;
+    align-items: center;
+}
+
+.enter-button:hover, .delete-button:hover {
+    cursor: pointer;
 }
 
 .math-container button:hover {
@@ -147,6 +189,7 @@
     align-self: flex-end;
     padding-right: 16px;
     font-size: 32px;
+    margin-bottom: 20px; /* Add some bottom margin for spacing */
 }
 
 /* Modal */
@@ -197,9 +240,9 @@
 @media (max-width: 600px) {
     .math-container {
         min-width: 380px;
+        min-height: 700px; /* Increase the height for smaller screens */
     }
     .back-to-dash .link {
         font-size: 30px;
     }
-    
 }

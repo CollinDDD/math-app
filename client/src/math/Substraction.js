@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { IoIosUndo } from "react-icons/io";
+import { IoIosUndo, IoMdBackspace } from "react-icons/io";
 import "./Math.css";
 
 function Subtraction() {
     const [currentProblem, setCurrentProblem] = useState(null);
     const [score, setScore] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
-    const [timer, setTimer] = useState(60); // Timer set to 60 seconds
+    const [timer, setTimer] = useState(6000); // Timer set to 60 seconds
     const [showModal, setShowModal] = useState(false); // State for showing modal
     const operator = '-';
     const answerInputRef = useRef(null); // Ref for the answer input element
@@ -83,10 +83,7 @@ function Subtraction() {
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault(); // Prevent the default behavior of the Enter key
-            const nextButton = e.target.closest('.math-container').querySelector('button');
-            if (nextButton) {
-                nextButton.click(); // Click the next button
-            }
+            checkAnswer(answerInputRef.current.value);
         }
     };
 
@@ -116,7 +113,28 @@ function Subtraction() {
                                 </p>
                             )}
                         </div>
-                        <button className="enter-button" onClick={() => checkAnswer(answerInputRef.current.value)}>Enter</button>
+                        <div className="number-buttons">
+                            {[...Array(10).keys()].map((number) => (
+                                <button
+                                    key={number}
+                                    onClick={() => {
+                                        if (answerInputRef.current.value.length < 2) {
+                                            answerInputRef.current.value += number;
+                                        }
+                                    }}
+                                >
+                                    {number}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="action-buttons">
+                            <button className="enter-button" onClick={() => checkAnswer(answerInputRef.current.value)}>Enter</button>
+                            <button className="delete-button" onClick={() => {
+                                answerInputRef.current.value = answerInputRef.current.value.slice(0, -1);
+                            }}>
+                                <IoMdBackspace />
+                            </button>
+                        </div>
                         <div className='score'>
                             <p>Score: {score}</p>
                         </div>
