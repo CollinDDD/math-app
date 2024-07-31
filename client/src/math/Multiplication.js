@@ -16,7 +16,7 @@ function Multiplication() {
     function generateProblem() {
         let num1 = Math.floor(Math.random() * 10) + 1;
         let num2 = Math.floor(Math.random() * 10) + 1; 
-        
+
         let problem = `${num1} ${operator} ${num2}`;
         let answer = num1 * num2;
         setCurrentProblem({ problem, answer });
@@ -88,36 +88,43 @@ function Multiplication() {
 
     return (
         <>
-            <div className='back-to-dash'>
-                <Link className='link' to="/dashboard">BACK TO DASHBOARD <IoIosUndo className='arrow' /></Link>
+            <div className='header-container'>
+                <div className='back-to-dash'>
+                    <Link className='link' to="/dashboard">BACK TO DASHBOARD <IoIosUndo className='arrow' /></Link>
+                </div>
+                <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
             </div>
-            <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
             <div className="math-container">
-                <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
-                
-                <div className="score-input">
-                    {currentProblem && (
-                        <p className='problem'>
-                            {currentProblem.problem} = <input
-                                className='answer'
-                                type="text"
-                                ref={answerInputRef}
-                                maxLength="3"
-                                onKeyDown={handleKeyPress}
-                            />
-                        </p>
-                    )}
-                </div>
-                <button onClick={() => checkAnswer(answerInputRef.current.value)}>Next<i className="fas fa-arrow-right"></i></button>
-                <div className='score'>
-                    <p>Score: {score}</p>
-                </div>
+                {!isRunning ? (
+                    <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
+                ) : (
+                    <>
+                        <div className="score-input">
+                            {currentProblem && (
+                                <p className='problem'>
+                                    {currentProblem.problem} = <input
+                                        className='answer'
+                                        type="text"
+                                        ref={answerInputRef}
+                                        maxLength="3"
+                                        onKeyDown={handleKeyPress}
+                                    />
+                                </p>
+                            )}
+                        </div>
+                        <button className="enter-button" onClick={() => checkAnswer(answerInputRef.current.value)}>Enter</button>
+                        <div className='score'>
+                            <p>Score: {score}</p>
+                        </div>
+                    </>
+                )}
             </div>
             {showModal && (
                 <div className="modal">
                     <div className="modal-content">
                         <h2>Time's Up!</h2>
                         <p>Your score is: {score}</p>
+                        <p>Try again to increase your score!</p>
                         <button onClick={() => setShowModal(false)}>Close</button>
                     </div>
                 </div>

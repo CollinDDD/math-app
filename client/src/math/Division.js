@@ -9,7 +9,6 @@ function Division() {
     const [isRunning, setIsRunning] = useState(false);
     const [timer, setTimer] = useState(60); // Timer set to 60 seconds
     const [showModal, setShowModal] = useState(false); // State for showing modal
-
     const operator = '÷';
     const answerInputRef = useRef(null); // Ref for the answer input element
 
@@ -95,36 +94,43 @@ function Division() {
 
     return (
         <>
-            <div className='back-to-dash'>
-                <Link className='link' to="/dashboard">BACK TO DASHBOARD <IoIosUndo className='arrow' /></Link>
+            <div className='header-container'>
+                <div className='back-to-dash'>
+                    <Link className='link' to="/dashboard">BACK TO DASHBOARD <IoIosUndo className='arrow' /></Link>
+                </div>
+                <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
             </div>
-            <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
             <div className="math-container">
-                <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
-                
-                <div className="score-input">
-                    {currentProblem && (
-                        <p className='problem'>
-                            {currentProblem.problem} = <input
-                                className='answer'
-                                type="text"
-                                ref={answerInputRef}
-                                maxLength="3"
-                                onKeyDown={handleKeyPress}
-                            />
-                        </p>
-                    )}
-                </div>
-                <button onClick={() => checkAnswer(answerInputRef.current.value)}>Next<i className="fas fa-arrow-right"></i></button>
-                <div className='score'>
-                    <p>Score: {score}</p>
-                </div>
+                {!isRunning ? (
+                    <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
+                ) : (
+                    <>
+                        <div className="score-input">
+                            {currentProblem && (
+                                <p className='problem'>
+                                    {currentProblem.problem} = <input
+                                        className='answer'
+                                        type="text"
+                                        ref={answerInputRef}
+                                        maxLength="3"
+                                        onKeyDown={handleKeyPress}
+                                    />
+                                </p>
+                            )}
+                        </div>
+                        <button className="enter-button" onClick={() => checkAnswer(answerInputRef.current.value)}>Enter</button>
+                        <div className='score'>
+                            <p>Score: {score}</p>
+                        </div>
+                    </>
+                )}
             </div>
             {showModal && (
                 <div className="modal">
                     <div className="modal-content">
                         <h2>Time's Up!</h2>
                         <p>Your score is: {score}</p>
+                        <p>Try again to increase your score!</p>
                         <button onClick={() => setShowModal(false)}>Close</button>
                     </div>
                 </div>

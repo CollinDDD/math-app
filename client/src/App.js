@@ -1,6 +1,6 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./login/Register"
-import Login from "./login/Login";
+//import Login from "./login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import Addition from './math/Addition';
 import Subtraction from "./math/Substraction";
@@ -18,7 +18,7 @@ function App() {
       <div>
       <Router>
         <Routes>
-          <Route path="/" element={<Login />}/>
+          <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/register" element={<Register/>} />
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/addition" element={<Addition />} />

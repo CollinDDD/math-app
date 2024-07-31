@@ -9,8 +9,10 @@
     src: url(../assets/E1234.ttf);
 }
 
-.back-to-dash {
-    margin-top: 20px;
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .back-to-dash .link {
@@ -21,9 +23,47 @@
     background-image: url("../assets/Blackboard.png");
     padding: 10px;
     border: 15px groove rgb(146, 79, 16);
+    margin-bottom: 10px;
 }
 
+.timer {
+    margin-top: 45px;
+    margin-bottom: 15px;
+    padding: 10px 10px;
+    border: 3px solid black;
+    border-radius: 40px;
+    text-align: center;
+    font-family: digital;
+    background-color: rgba(255, 255, 255, 0.522);
+}
 
+.time-header {
+    text-align: center;
+    background-color: black;
+    color: green;
+    border: 3px solid white;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+.timer button {
+    font-family: chalkboy;
+    font-size: 40px;
+    color: rgb(255, 124, 1);
+    background-color: rgba(251, 255, 0, 1);
+    width: 135px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    border: 3px solid rgb(255, 124, 1);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.timer button:hover {
+    border: 3px solid rgb(165, 80, 0);
+    box-shadow: none;
+    cursor: pointer;
+}
 
 .math-container {
     background-image: url("../assets/Blackboard.png");
@@ -31,16 +71,19 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    min-height: 500px;
+    min-height: 400px;
     text-align: center;
     display: flex;
     border: 25px groove rgb(146, 79, 16);
     padding: 0px;
     flex-direction: column;
     color: white;
+    min-width: 500px;
     width: 65%;
-    margin: 0 auto;
+    height: 400px; /* Set a fixed height */
+    margin: 0 auto; /* Adjusted to prevent overlapping with the timer */
     align-items: center;
+    justify-content: center;
 }
 
 .math-header {
@@ -63,7 +106,7 @@
     text-align: center;
     background-color: rgba(240, 248, 255, 0);
     border: 2px white;
-    border-style:dashed;
+    border-style: dashed;
 }
 
 .score-input {
@@ -75,7 +118,7 @@
 .math-container button {
     font-family: chalkboy;
     font-size: 48px;
-    width: 100px;
+    width: 125px;
     color: white;
     background-color: rgba(240, 248, 255, 0);
     border: 2px white;
@@ -97,64 +140,6 @@
     align-self: flex-end;
     padding-right: 16px;
     font-size: 32px;
-}
-
-
-
-/* timer */
-
-
-
-
-
-.time {
-    display: flex;
-    justify-content: space-between; /* Ensure even spacing between children */
-    align-items: center; /* Align items vertically */
-    padding-right: 5%; /* Adjust padding to control the right edge space */
-}
-
-.time-header {
-    text-align: center;
-    background-color: black;
-    color: green;
-    border: 3px solid white;
-    padding: 10px; /* Add padding for extra space around the text */
- /* Ensure the width is at least enough to fit the content */
-}
-
-.timer {
-    padding-top: 10px;
-    text-align: right;
-    padding-right: 5%;
-    font-family: digital;
-    justify-content: center;
-}
-
-.timer h2 {
-    padding: 10px;
-    text-align: center;
-    border-radius: 50px;
-    margin-left: 70%;
-}
-
-.timer button {
-    font-family: chalkboy;
-    font-size: 40px;
-    color: rgb(255, 124, 1);
-    background-color: rgba(251, 255, 0, 1);
-    width: 135px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-radius: 50px;
-    border: 3px solid rgb(255, 124, 1); /* Add a border with a slight transparency */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-}
-
-.timer button:hover {
-    border: 3px solid rgb(165, 80, 0); /* Darken the border on hover */
-    box-shadow: none; /* Remove the shadow on hover */
-    cursor: pointer;
 }
 
 /* Modal */

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosUndo } from "react-icons/io";
-
 import "./Math.css";
 
 function Subtraction() {
@@ -13,15 +12,15 @@ function Subtraction() {
     const operator = '-';
     const answerInputRef = useRef(null); // Ref for the answer input element
 
-    // Generator function to create a random addition problem
+    // Generator function to create a random subtraction problem
     function generateProblem() {
         let num1 = Math.floor(Math.random() * 20) + 1;
         let num2 = Math.floor(Math.random() * 10) + 1;
-       
+
         if (num1 < num2) {
             [num1, num2] = [num2, num1];
-        } 
-        
+        }
+
         let problem = `${num1} ${operator} ${num2}`;
         let answer = num1 - num2;
         setCurrentProblem({ problem, answer });
@@ -93,30 +92,36 @@ function Subtraction() {
 
     return (
         <>
-            <div className='back-to-dash'>
-                <Link className='link' to="/dashboard">BACK TO DASHBOARD <IoIosUndo className='arrow' /></Link>
+            <div className='header-container'>
+                <div className='back-to-dash'>
+                    <Link className='link' to="/dashboard">BACK TO DASHBOARD <IoIosUndo className='arrow' /></Link>
+                </div>
+                <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
             </div>
-            <Timer startTimer={() => { setIsRunning(true); setScore(0); }} />
             <div className="math-container">
-                <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
-                
-                <div className="score-input">
-                    {currentProblem && (
-                        <p className='problem'>
-                            {currentProblem.problem} = <input
-                                className='answer'
-                                type="text"
-                                ref={answerInputRef}
-                                maxLength="2"
-                                onKeyDown={handleKeyPress}
-                            />
-                        </p>
-                    )}
-                </div>
-                <button onClick={() => checkAnswer(answerInputRef.current.value)}>Next<i className="fas fa-arrow-right"></i></button>
-                <div className='score'>
-                    <p >Score: {score}</p>
-                </div>
+                {!isRunning ? (
+                    <p className="math-header">Answer as many questions correctly as you can to increase your score!</p>
+                ) : (
+                    <>
+                        <div className="score-input">
+                            {currentProblem && (
+                                <p className='problem'>
+                                    {currentProblem.problem} = <input
+                                        className='answer'
+                                        type="text"
+                                        ref={answerInputRef}
+                                        maxLength="2"
+                                        onKeyDown={handleKeyPress}
+                                    />
+                                </p>
+                            )}
+                        </div>
+                        <button className="enter-button" onClick={() => checkAnswer(answerInputRef.current.value)}>Enter</button>
+                        <div className='score'>
+                            <p>Score: {score}</p>
+                        </div>
+                    </>
+                )}
             </div>
             {showModal && (
                 <div className="modal">

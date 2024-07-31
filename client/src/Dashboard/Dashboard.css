@@ -96,3 +96,12 @@ body  {
     transform: scale(1.1); /* Scale the button to 1.1 times its size */
     box-shadow: -5px 4px 15px black; /* Increase the shadow to create a pop-out effect */
 }
+
+@media screen and (max-width: 790px) {
+    .icons-top {
+        flex-direction: column;
+    }
+    .icons-bottom {
+        flex-direction: column;
+    }
+}
