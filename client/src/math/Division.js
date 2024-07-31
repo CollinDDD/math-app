@@ -110,7 +110,9 @@ function Division() {
                                 <p className='problem'>
                                     {currentProblem.problem} = <input
                                         className='answer'
-                                        type="tel"
+                                        type="text"
+                                        inputMode="numeric"
+                                        pattern="[0-9]*"
                                         ref={answerInputRef}
                                         maxLength="3"
                                         onKeyDown={handleKeyPress}
