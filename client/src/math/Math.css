@@ -15,6 +15,13 @@
     align-items: center;
 }
 
+.back-to-dash {
+    width: 100%; /* Ensure it takes full width */
+    display: flex;
+    justify-content: center; /* Center the link within the container */
+    margin-bottom: 10px; /* Adjust spacing if necessary */
+}
+
 .back-to-dash .link {
     text-decoration: none;
     font-family: chalkboy;
@@ -184,4 +191,15 @@
 
 .modal-content button:hover {
     background-color: #45a049;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    .math-container {
+        min-width: 380px;
+    }
+    .back-to-dash .link {
+        font-size: 30px;
+    }
+    
 }
