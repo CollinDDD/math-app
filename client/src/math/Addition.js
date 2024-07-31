@@ -55,7 +55,7 @@ function Addition() {
                 }, 1000);
                 return () => clearInterval(timerId.current);
             }
-        }, []);
+        }, [isRunning]);
 
         return (
             <div className="timer">
@@ -103,9 +103,8 @@ function Addition() {
                                 <p className='problem'>
                                     {currentProblem.problem} = <input
                                         className='answer'
-                                        type="text"
+                                        type="number"
                                         inputMode="numeric"
-                                        pattern="[0-9]*"
                                         ref={answerInputRef}
                                         maxLength="2"
                                         onKeyDown={handleKeyPress}
