@@ -26,6 +26,10 @@ body  {
     display: flex;
 }
 
+.title {
+    font-size: 90px;
+}
+
 .home-container {
     background-color: rgba(214, 188, 163, 0.452);
     text-align: center;

@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 function Dashboard() {
     return (
         <>
+        
         <div className="home-container">
+            <h1 className="title">Arithme Timer</h1>
             <h2 className="header">Choose a category to begin</h2>
             <div className="icons-top">
                 <div className="symbols">
