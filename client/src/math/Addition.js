@@ -109,18 +109,27 @@ function Addition() {
                             )}
                         </div>
                         <div className="number-buttons">
-                            {[...Array(10).keys()].map((number) => (
+                            {[...Array(9).keys()].map((number) => (
                                 <button
-                                    key={number}
+                                    key={number + 1}
                                     onClick={() => {
                                         if (answerInputRef.current.value.length < 2) {
-                                            answerInputRef.current.value += number;
+                                            answerInputRef.current.value += number + 1;
                                         }
                                     }}
                                 >
-                                    {number}
+                                    {number + 1}
                                 </button>
                             ))}
+                            <button
+                                onClick={() => {
+                                    if (answerInputRef.current.value.length < 2) {
+                                        answerInputRef.current.value += 0;
+                                    }
+                                }}
+                            >
+                                0
+                            </button>
                         </div>
                         <div className="action-buttons">
                             <button className="enter-button" onClick={() => checkAnswer(answerInputRef.current.value)}>Enter</button>

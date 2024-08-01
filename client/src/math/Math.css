@@ -88,7 +88,7 @@
     padding: 0px;
     color: white;
     min-width: 550px;
-    width: 65%;
+    width: 85%;
     height: 400px; 
     margin: 0 auto; 
 }
@@ -127,10 +127,32 @@
 }
 
 .number-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
     gap: 10px; /* Add space between buttons */
+}
+
+/* Layout for screens wider than 600px */
+@media (min-width: 601px) {
+    .number-buttons {
+        grid-template-columns: repeat(5, 1fr); /* 5 columns for wider screens */
+    }
+}
+
+/* Layout for screens 600px or narrower */
+@media (max-width: 600px) {
+    .number-buttons {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for narrower screens */
+        grid-template-rows: auto auto auto auto; /* 4 rows */
+        grid-template-areas: 
+            "one two three"
+            "four five six"
+            "seven eight nine"
+            ". zero .";
+    }
+    
+    .number-buttons button:nth-child(10) {
+        grid-area: zero;
+    }
 }
 
 .number-buttons button {
@@ -146,22 +168,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin:  5px 5px;
 }
 
 .number-buttons button:hover {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.2); /* Add a hover effect for better visibility */
+    background-color: rgba(0, 0, 0, 0.2); 
 }
 
 .enter-button, .delete-button {
     font-family: chalkboy;
     font-size: 48px;
     width: 125px;
+    height: 70px;
     color: white;
     background-color: rgba(240, 248, 255, 0);
     border: 2px white;
     border-style: solid;
-    border-radius: 0px;
+    border-radius: 15px;
     margin: 5px 20px;
 }
 
@@ -174,6 +198,7 @@
 
 .enter-button:hover, .delete-button:hover {
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2); 
 }
 
 .math-container button:hover {
@@ -240,9 +265,14 @@
 @media (max-width: 600px) {
     .math-container {
         min-width: 380px;
-        min-height: 700px; /* Increase the height for smaller screens */
+        min-height: 800px; 
     }
     .back-to-dash .link {
         font-size: 30px;
+    }
+    .enter-button, .delete-button {
+        font-size: 24px;
+        height: 70px;
+        width: 70px;
     }
 }
